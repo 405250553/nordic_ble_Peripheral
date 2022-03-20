@@ -1,0 +1,17 @@
+.\_build\data_builder.o: ..\..\..\eMPL\mllite\data_builder.c
+.\_build\data_builder.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\_build\data_builder.o: ..\..\..\eMPL\mllite\ml_math_func.h
+.\_build\data_builder.o: ..\..\..\eMPL\driver\include\mltypes.h
+.\_build\data_builder.o: ..\..\..\eMPL\driver\include\stdint_invensense.h
+.\_build\data_builder.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\_build\data_builder.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\errno.h
+.\_build\data_builder.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+.\_build\data_builder.o: ..\..\..\eMPL\mllite\data_builder.h
+.\_build\data_builder.o: ..\..\..\eMPL\driver\include\mlmath.h
+.\_build\data_builder.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\_build\data_builder.o: ..\..\..\eMPL\mllite\storage_manager.h
+.\_build\data_builder.o: ..\..\..\eMPL\mllite\message_layer.h
+.\_build\data_builder.o: ..\..\..\eMPL\mllite\results_holder.h
+.\_build\data_builder.o: ..\..\..\eMPL\driver\include\log.h
+.\_build\data_builder.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\_build\data_builder.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
