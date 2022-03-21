@@ -7,3 +7,5 @@ https://blog.csdn.net/suxiang198/article/details/75645542
 https://www.liangzl.com/get-article-detail-206738.html
 
 https://github.com/Huffer342-WSH/MPU6050_I2C
+
+https://blog.csdn.net/zh471021698/article/details/88539143
