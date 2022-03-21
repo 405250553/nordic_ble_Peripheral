@@ -146,13 +146,6 @@ In newer versions, the low power accelerometer is connected to a different power
 remain on to wake the system even if VDD is turned off. */
 #define VDD_PWR_CTRL                        30
 
-uint8_t i2c_send = 0;
-uint8_t ble_send_data[60] = {0};
-uint16_t ble_send_len = sizeof(ble_send_data);
-volatile bool i2c_get = false;
-volatile bool conn_flag = false;
-volatile bool adv_flag = false;
-
 BLE_NUS_DEF(m_nus, NRF_SDH_BLE_TOTAL_LINK_COUNT);                                   /**< BLE NUS service instance. */
 NRF_BLE_GATT_DEF(m_gatt);                                                           /**< GATT module instance. */
 NRF_BLE_QWR_DEF(m_qwr);                                                             /**< Context for the Queued Write module.*/
@@ -165,6 +158,18 @@ static ble_uuid_t m_adv_uuids[]          =                                      
     {BLE_UUID_NUS_SERVICE, NUS_SERVICE_UUID_TYPE}
 };
 
+typedef struct sysFlag{
+  volatile bool i2c_get;
+  volatile bool conn_flag;
+  volatile bool adv_flag;
+  volatile bool sleep_flag;
+}sysFlag;
+
+sysFlag sys = {false,false,false,false};
+
+uint8_t i2c_send = 0;
+uint8_t ble_send_data[60] = {0};
+uint16_t ble_send_len = sizeof(ble_send_data);
 
 /**@brief Function for assert macro callback.
  *
@@ -467,11 +472,13 @@ static void on_adv_evt(ble_adv_evt_t ble_adv_evt)
     {
         case BLE_ADV_EVT_FAST:
             //err_code = bsp_indication_set(BSP_INDICATE_ADVERTISING);
-            adv_flag = true;
+            sys.adv_flag = true;
             APP_ERROR_CHECK(err_code);
             break;
         case BLE_ADV_EVT_IDLE:
-            sleep_mode_enter();
+            //sx1509_reset();
+            //sleep_mode_enter();
+            sys.sleep_flag = true;
             break;
         default:
             break;
@@ -493,7 +500,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
         case BLE_GAP_EVT_CONNECTED:
             //NRF_LOG_INFO("Connected");
             //nrf_gpio_pin_clear(LED2);
-            conn_flag = true;
+            sys.conn_flag = true;
             m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
             err_code = nrf_ble_qwr_conn_handle_assign(&m_qwr, m_conn_handle);
             APP_ERROR_CHECK(err_code);
@@ -785,8 +792,8 @@ static void advertising_start(void)
 
 void data_send()
 {
-    if(!i2c_get)
-        i2c_get = true;
+    if(!sys.i2c_get)
+        sys.i2c_get = true;
 }
 
 
@@ -853,7 +860,7 @@ void ble_data_send(){
     static uint8_t acc_val[6] = {0};
     uint16_t acc_rawdata;
 
-    if(i2c_get)
+    if(sys.i2c_get)
     {
         i2c_data_read_bytes(LIS2DH_ADD,acc_reg,6,acc_val);
   
@@ -871,7 +878,7 @@ void ble_data_send(){
             ble_send_data[i2c_send*6+i*2+1] = (uint8_t)acc_rawdata;
         }
         i2c_send++;
-        i2c_get = false;
+        sys.i2c_get = false;
     }
     if(i2c_send==10){
         ble_nus_data_send(&m_nus,ble_send_data,&ble_send_len,m_conn_handle);
@@ -929,14 +936,19 @@ int main(void)
       idle_state_handle();
       ble_data_send();
 
-      if(conn_flag){
+      if(sys.conn_flag){
           conn_led();
-          conn_flag = false;
+          sys.conn_flag = false;
       }
 
-      if(adv_flag){
+      if(sys.adv_flag){
           advertising_led();
-          adv_flag = false;
+          sys.adv_flag = false;
+      }
+
+      if(sys.sleep_flag){
+          sx1509_reset();
+          sleep_mode_enter();
       }
     }
 }

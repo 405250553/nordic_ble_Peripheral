@@ -55,6 +55,27 @@
 #include "inv_mpu.h"
 
 #define MPU9250_ADD  0X68
+#define WHO_AM_I_MPU9250 0x75 // Should return 0x71
+
+#define USE_PRINTF_DEBUG 1
+#define USE_PYTHON_CLIENT 0
+#define MPU_SELF_TEST 0
+#define MOTION (0)
+#define NO_MOTION (1)
+
+#define ACCEL_ON (0x01)
+#define GYRO_ON (0x02)
+#define COMPASS_ON (0x04)
+
+/* Starting sampling rate. */
+#define DEFAULT_MPU_HZ (200)
+
+#define FLASH_SIZE (512)
+#define FLASH_MEM_START ((void *)0x1800)
+
+#define PEDO_READ_MS (1000)
+#define TEMP_READ_MS (500)
+#define COMPASS_READ_MS (100)
 
 /**@brief TWI communication initialization struct.
  */
@@ -85,6 +106,8 @@ typedef struct
     unsigned int report;
     unsigned short dmp_features;
 }hal_s;
+
+uint8_t mpu9250_who_am_i(void);
 
 /**@brief Function for initializing the MPU-9250 driver.
  *

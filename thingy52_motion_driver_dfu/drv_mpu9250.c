@@ -61,6 +61,14 @@ static struct
 } m_mpu9250 = {.initialized = false, .int_registered = false};
 
 
+uint8_t mpu9250_who_am_i(){
+    uint8_t data_return;
+    sx1509_read_reg(MPU9250_ADD,WHO_AM_I_MPU9250,&data_return);
+
+    return data_return;
+}
+
+
 int drv_mpu9250_write(unsigned char slave_addr, unsigned char reg_addr, unsigned char length, unsigned char * p_data)
 {
 		/*
