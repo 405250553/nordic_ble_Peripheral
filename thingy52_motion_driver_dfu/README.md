@@ -2,6 +2,8 @@
 
 - HW:thingy52
 - 需先將sx1509 i2c config好，才能使用mpu9250
+- (P.S.) 可搭配test_cube.py 畫圖
+- (P.S.) ble_motion_central.hex 為接收端韌體(52DK)，baud rate = 115200
 
 ### 參考
 
