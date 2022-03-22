@@ -1,5 +1,7 @@
-HW:thingy52
+# (SX1509+LIS2DH12 send data) NUS+DFU_threshold
 
-功能:ble nus send 6軸資料出來，LIS2DH12_plot.py 可畫圖
-靜止 INTO_SLEEP 秒後會停止發送data
-當單一方向加速度大於設定值後，會觸發Interrupt開始重新發送data
+- HW:thingy52
+- ble nus send 6軸資料
+- 靜止 `#define INTO_SLEEP` 秒後會停止發送data
+- 當單一方向加速度大於設定值後，會觸發Interrupt開始重新發送data
+- (P.S.) LIS2DH12_plot.py 可畫圖
