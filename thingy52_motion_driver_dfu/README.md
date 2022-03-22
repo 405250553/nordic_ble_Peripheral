@@ -82,14 +82,20 @@ drv_mpu9250_XXX... 皆為自己的Driver，參考thingy52 project中的`drv_mpu9
 
 編譯器#define：
 
-`EMPL_TARGET_STM32F1`
+`NRF_DFU_SVCI_ENABLED` 
 
-`EMPL`
+`NRF_DFU_TRANSPORT_BLE=1` 
 
-`MPL_LOG_NDEBUG = 0`
+`EMPL REMOVE_LOGGING` 
 
-`MPU6050`你使用的型号
+`MPL_LOG_NDEBUG = 0` 
 
-`USE_DMP`
+`USE_DMP` 
 
-`REMOVE_LOGGING`
+`ARM_MATH_CM4` 
+
+`NRF_LOG_USES_RTT=1` 
+
+`MPU9250` 
+
+`EMPL_TARGET_NRF52` 
