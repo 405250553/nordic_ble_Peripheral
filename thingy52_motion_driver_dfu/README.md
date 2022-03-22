@@ -65,3 +65,19 @@ unsigned char *mpl_key = (unsigned char *)"eMPL 5.1";hal_s hal = {0};
   ```
  
  drv_mpu9250_XXX... 皆為自己的Driver，參考thingy52 project中的`drv_mpu9250.c`,`drv_mpu9250.h`，由於thingy52 的 sx1509 與 mpu9250 共在同一組i2c上，且須先透過 sx1509 將 mpu9250 前置的switch enable，故`drv_mpu9250_write`,`drv_mpu9250_read`內皆是接`sx1509.c`
+ 
+ ## 編譯
+
+編譯器#define：
+
+`EMPL_TARGET_STM32F1`
+
+`EMPL`
+
+`MPL_LOG_NDEBUG = 0`
+
+`MPU6050`你使用的型号
+
+`USE_DMP`
+
+`REMOVE_LOGGING`
