@@ -6,3 +6,4 @@
 - 靜止 `#define INTO_SLEEP` 秒後會停止發送data
 - 當單一方向加速度大於設定值後，會觸發Interrupt開始重新發送data
 - (P.S.) LIS2DH12_plot.py 可畫圖
+- LIS2DH12_threshold_central.hex 為接收端韌體(52DK)，baud rate = 115200
