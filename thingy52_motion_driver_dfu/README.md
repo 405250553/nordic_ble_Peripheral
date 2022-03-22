@@ -1,6 +1,7 @@
 # thingy52_motion_driver_dfu
 
 - HW:thingy52
+- IDE: Keil (因 motion driver library而改)
 - 需先將sx1509 i2c config好，才能使用mpu9250
 - sdk_config.h `#define NRF_SDH_CLOCK_LF_SRC 0` (ble clock 改為內部低頻震盪器)
 - (P.S.) 可搭配test_cube.py 畫圖
