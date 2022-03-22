@@ -15,6 +15,13 @@ https://blog.csdn.net/zh471021698/article/details/88539143
 eMPL內均為Motion Driver 6.12原有的文件夾
 
 ## 修改
+
+- inv_mpu_dmp_motion_driver.c : 647,648行
+```c
+    //__no_operation(); //IAR command
+	  __ASM("nop"); //KEIL command
+```
+    
 - Motion Driver 6.12本身就支援STM32F4，以`#define EMPL_TARGET_STM32F4`為定義，基於此額外增加 `#define EMPL_TARGET_NRF52`
 
 #### inv_mpu.c
@@ -64,7 +71,7 @@ unsigned char *mpl_key = (unsigned char *)"eMPL 5.1";hal_s hal = {0};
 #define log_e       MPL_LOGE
   ```
  
- drv_mpu9250_XXX... 皆為自己的Driver，參考thingy52 project中的`drv_mpu9250.c`,`drv_mpu9250.h`，由於thingy52 的 sx1509 與 mpu9250 共在同一組i2c上，且須先透過 sx1509 將 mpu9250 前置的switch enable，故`drv_mpu9250_write`,`drv_mpu9250_read`內皆是接`sx1509.c`
+- drv_mpu9250_XXX... 皆為自己的Driver，參考thingy52 project中的`drv_mpu9250.c`,`drv_mpu9250.h`，由於thingy52 的 sx1509 與 mpu9250 共在同一組i2c上，且須先透過 sx1509 將 mpu9250 前置的switch enable，故`drv_mpu9250_write`,`drv_mpu9250_read`內皆是接`sx1509.c`
  
  ## 編譯
 
