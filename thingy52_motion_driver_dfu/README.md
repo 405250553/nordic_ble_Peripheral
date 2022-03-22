@@ -1,6 +1,8 @@
 # thingy52_motion_driver_dfu
 
-以thingy52所開發的Project，
+以thingy52所開發的Project，需先將sx1509 i2c config好，才能使用mpu9250
+
+### 參考
 
 https://blog.csdn.net/suxiang198/article/details/75645542
 
