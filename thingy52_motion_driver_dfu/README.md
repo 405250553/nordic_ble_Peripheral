@@ -18,7 +18,7 @@ eMPL內均為Motion Driver 6.12原有的文件夾
 - Motion Driver 6.12本身就支援STM32F4，以`#define EMPL_TARGET_STM32F4`為定義，基於此額外增加 `#define EMPL_TARGET_NRF52`
 
 #### inv_mpu.c
-```
+```c
 #elif defined EMPL_TARGET_NRF52
 #include "nrf_delay.h"
 #include "log.h"
@@ -38,7 +38,7 @@ eMPL內均為Motion Driver 6.12原有的文件夾
 ```
 
 #### inv_mpu_dmp_motion_driver.c
-```
+```c
 #elif defined EMPL_TARGET_NRF52
 #include "nrf_delay.h"
 //#include "pca20020.h"
