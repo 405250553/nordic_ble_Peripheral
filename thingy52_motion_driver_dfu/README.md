@@ -47,26 +47,21 @@ eMPL內均為Motion Driver 6.12原有的文件夾
 
 #define delay_ms    nrf_delay_ms
 ```
+在任一檔案中追加此 global variable
+unsigned char *mpl_key = (unsigned char *)"eMPL 5.1";hal_s hal = {0};
 
 ## 移植
-综上，实际上需要提供的只有
 
-- i2c_write(unsigned char slave_addr, unsigned char reg_addr,*unsigned char length, unsigned char const \*data)*
-
-- i2c_read(unsigned char slave_addr, unsigned char reg_addr,*unsigned char length, unsigned char \*data)*
-
-- delay_ms(unsigned long num_ms)
-
-- get_ms(unsigned long \*count)
-
-  该部分具体代码如下
+`inv_mpu.c`中定義如i2c func ...，需要此部分的define接自己的func
 
   ```c
-  #define i2c_write Sensors_I2C_WriteRegister
-  
-  #define i2c_read Sensors_I2C_ReadRegister
-  
-  #define delay_ms HAL_Delay
-  
-  #define get_ms get_ms_user
+#define i2c_write   drv_mpu9250_write
+#define i2c_read    drv_mpu9250_read
+#define reg_int_cb  drv_mpu9250_int_register
+#define get_ms      drv_mpu9250_ms_get
+#define delay_ms    nrf_delay_ms
+#define log_i       MPL_LOGI
+#define log_e       MPL_LOGE
   ```
+ 
+ drv_mpu9250_XXX... 皆為自己的Driver，參考thingy52中的drv_mpu9250.c,drv_mpu9250.h，由於thingy52 的 sx1509 與 mpu9250 共在同一組i2c上，且須先透過 sx1509 將 mpu9250 前置的switch enable，故`drv_mpu9250_write`,`drv_mpu9250_read`內皆是接`sx1509.c`
