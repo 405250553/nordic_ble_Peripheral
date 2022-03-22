@@ -2,6 +2,7 @@
 
 - HW:thingy52
 - 需先將sx1509 i2c config好，才能使用mpu9250
+- sdk_config.h `#define NRF_SDH_CLOCK_LF_SRC 0` (ble clock 改為內部低頻震盪器)
 - (P.S.) 可搭配test_cube.py 畫圖
 - (P.S.) ble_motion_central.hex 為接收端韌體(52DK)，baud rate = 115200
 
