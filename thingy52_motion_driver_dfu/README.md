@@ -14,9 +14,10 @@ https://blog.csdn.net/zh471021698/article/details/88539143
 
 eMPL內均為Motion Driver 6.12原有的文件夾
 
+## 修改
 - Motion Driver 6.12本身就支援STM32F4，以`#define EMPL_TARGET_STM32F4`為定義，基於此額外增加 `#define EMPL_TARGET_NRF52`
 
-inv_mpu.c
+#### inv_mpu.c
 ```
 #elif defined EMPL_TARGET_NRF52
 #include "nrf_delay.h"
@@ -36,7 +37,7 @@ inv_mpu.c
 #endif
 ```
 
-inv_mpu_dmp_motion_driver.c
+#### inv_mpu_dmp_motion_driver.c
 ```
 #elif defined EMPL_TARGET_NRF52
 #include "nrf_delay.h"
@@ -47,6 +48,7 @@ inv_mpu_dmp_motion_driver.c
 #define delay_ms    nrf_delay_ms
 ```
 
+## 移植
 综上，实际上需要提供的只有
 
 - i2c_write(unsigned char slave_addr, unsigned char reg_addr,*unsigned char length, unsigned char const \*data)*
